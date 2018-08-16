@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import Board from './Board'
 import PlayerRange from './PlayerRange'
+import PlayerDecision from './PlayerDecision'
 
 import '../App.css';
 
@@ -37,31 +38,14 @@ class App extends Component {
               </select>
           </div>
           <div className='flex-container'>
-              <div className='flex-item'>
-                  GIVE OOP PLAYER OPTIONS
-                  <div className='flex-container'>
-                      <div className='flex-item'>
-                          BET
-                      </div>
-                      <div className='flex-item'>
-                          CHECK
-                      </div>
-                  </div>
-              </div>
-              <div className='flex-item'>
-                  GIVE IP PLAYER OPTIONS
-                  <div className='flex-container'>
-                      <div className='flex-item'>
-                          BET
-                      </div>
-                      <div className='flex-item'>
-                          CHECK
-                      </div>
-                      <div className='flex-item'>
-                          CALL
-                      </div>
-                  </div>
-              </div>
+          <PlayerDecision
+              position = "oop"
+          />
+          <PlayerDecision
+              position = "ip"
+
+          />
+
           </div>
       </div>
     );
