@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Board from './Board'
+import PlayerRange from './PlayerRange'
 
 import '../App.css';
 
@@ -14,23 +15,14 @@ class App extends Component {
           <p className='explanation'> --> player enters COMMUNITY CARDS</p>
           <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
           <div className='flex-container'>
-
               <div className='flex-container flex-item'>
-                  <div className='oop-position flex-item'>
-                      OUT OF POSITION
-                      <div>
-                          <button> Enter OOP range </button>
-                      </div>
-                  </div>
-                  <div className='ip-position flex-item'>
-                      IN POSITION
-                      <div>
-                          <button> Enter IP range </button>
-                      </div>
-                  </div>
+                <PlayerRange
+                    position = "oop"
+                />
+                  <PlayerRange
+                      position = "ip"
+                  />
               </div>
-
-
           <Board/>
           </div>
 
