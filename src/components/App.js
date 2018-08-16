@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Board from './Board'
 
 import '../App.css';
 
@@ -9,7 +10,11 @@ class App extends Component {
         <header >
           <h1>Welcome to Poker Training Buddy </h1>
         </header>
+          <p className='explanation'> --> player enters OOP/IP ranges</p>
+          <p className='explanation'> --> player enters COMMUNITY CARDS</p>
+          <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
           <div className='flex-container'>
+
               <div className='flex-container flex-item'>
                   <div className='oop-position flex-item'>
                       OUT OF POSITION
@@ -25,17 +30,13 @@ class App extends Component {
                   </div>
               </div>
 
-              <div className='flex-container flex-item'>
-                  <div className='board flex-item'>
-                      BOARD
-                      <div>
-                          <button> ENTER COMMUNITY CARDS </button>
-                      </div>
-                  </div>
-              </div>
+
+          <Board/>
           </div>
 
           <div className='board-stage'>
+              <p className='explanation'> --> player selects BOARD GAME STAGE</p>
+
               BOARD SITUATION
               <select>
                   <option value="flop">FLOP</option>
@@ -70,8 +71,6 @@ class App extends Component {
                   </div>
               </div>
           </div>
-
-
       </div>
     );
   }
