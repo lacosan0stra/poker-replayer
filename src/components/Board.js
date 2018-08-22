@@ -1,27 +1,9 @@
 import React, { Component } from 'react'
-import Card from './Card'
-
 
 
 class Board extends Component {
 
-    state = {
-        selectedCards : [],
-
-
-    }
-
-    handleClick = (e) => {
-       console.log("target",  e.target.id)
-        this.setState({
-            selectedCards : this.state.selectedCards.concat([e.target.id])
-        })
-
-    }
-
     render() {
-
-        {console.log(this.state.selectedCards)}
 
         return(
                 <div className='flex-container flex-item'>
@@ -29,7 +11,7 @@ class Board extends Component {
                     <div className='board flex-item'>
                         <div>
 
-                            <table id="communityCards" onClick={this.handleClick}>
+                            <table id="communityCards" onClick={this.props.handleClick}>
                                 <tbody>
                                 <tr>
                                     <th className="suit redSuit" align="center">HEARTS</th>
@@ -117,35 +99,7 @@ class Board extends Component {
                                 </tr>
                                 </tbody>
                             </table>
-                            <button> ENTER COMMUNITY CARDS </button>
-                            <div className='flex-container'>
-                                <Card
-                                    srcUrl = {this.state.selectedCards[0]}
-                                    widthImg = "50"
-                                    heightImg = "70"
-                                />
-                                <Card
-                                    srcUrl = {this.state.selectedCards[1]}
-                                    widthImg = "50"
-                                    heightImg = "70"
 
-                                />
-                                <Card
-                                    srcUrl = {this.state.selectedCards[2]}
-                                    widthImg = "50"
-                                    heightImg = "70"
-                                />
-                                <Card
-                                    srcUrl = {this.state.selectedCards[3]}
-                                    widthImg = "50"
-                                    heightImg = "70"
-                                />
-                                <Card
-                                    srcUrl = {this.state.selectedCards[4]}
-                                    widthImg = "50"
-                                    heightImg = "70"
-                                />
-                            </div>
                         </div>
                     </div>
                 </div>

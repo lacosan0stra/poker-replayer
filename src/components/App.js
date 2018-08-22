@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Board from './Board'
 import PlayerRange from './PlayerRange'
 import PlayerDecision from './PlayerDecision'
+import CommunityCards from './CommunityCards'
 
 import '../App.css';
 import Card from "./Card";
@@ -9,7 +10,21 @@ import Card from "./Card";
 
 class App extends Component {
 
+    state = {
+        selectedCards : [],
+    }
+
+    handleClick = (e) => {
+
+        if (this.state.selectedCards.length <5 && !this.state.selectedCards.includes(e.target.id)) {
+            this.setState({
+                selectedCards : this.state.selectedCards.concat([e.target.id])
+            })
+        }
+    }
+
   render() {
+        console.log(this.state.selectedCards)
     return (
       <div>
         <header >
@@ -20,9 +35,11 @@ class App extends Component {
           <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
           <div className='flex-container'>
                 <PlayerRange position = "oop" />
-              <Board>
+              <Board
+                  handleClick={this.handleClick}
+              />
 
-              </Board>
+
               <PlayerRange position = "ip" />
           </div>
 
@@ -49,6 +66,14 @@ class App extends Component {
 
 
           </div>
+
+          <CommunityCards
+              flopOne={this.state.selectedCards[0]}
+              flopTwo={this.state.selectedCards[1]}
+              flopThree={this.state.selectedCards[2]}
+              turn={this.state.selectedCards[3]}
+              river={this.state.selectedCards[4]}
+          />
       </div>
     );
   }
