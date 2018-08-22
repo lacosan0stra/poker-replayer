@@ -4,8 +4,11 @@ import PlayerRange from './PlayerRange'
 import PlayerDecision from './PlayerDecision'
 
 import '../App.css';
+import Card from "./Card";
+
 
 class App extends Component {
+
   render() {
     return (
       <div>
@@ -16,35 +19,34 @@ class App extends Component {
           <p className='explanation'> --> player enters COMMUNITY CARDS</p>
           <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
           <div className='flex-container'>
-              <div className='flex-container flex-item'>
-                <PlayerRange
-                    position = "oop"
-                />
-                  <PlayerRange
-                      position = "ip"
-                  />
-              </div>
-          <Board/>
+                <PlayerRange position = "oop" />
+              <Board>
+
+              </Board>
+              <PlayerRange position = "ip" />
           </div>
 
           <div className='board-stage'>
               <p className='explanation'> --> player selects BOARD GAME STAGE</p>
 
-              BOARD SITUATION
-              <select>
-                  <option value="flop">FLOP</option>
-                  <option value="turn">TURN</option>
-                  <option value="river">RIVER</option>
-              </select>
           </div>
           <div className='flex-container'>
           <PlayerDecision
               position = "oop"
           />
+              <div className='flex-item flex-container'>
+
+                  <select className='flex-item'>
+                      <option value="flop">FLOP</option>
+                      <option value="turn">TURN</option>
+                      <option value="river">RIVER</option>
+                  </select>
+              </div>
+
           <PlayerDecision
               position = "ip"
-
           />
+
 
           </div>
       </div>
