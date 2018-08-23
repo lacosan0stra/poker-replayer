@@ -26,3 +26,11 @@ body {
   font-size: smaller;
   font-weight: bold;
 }
+
+table, th, td {
+  border: 1px solid black;
+}
+
+.selected {
+  background-color: yellow;
+}

@@ -1,26 +1,43 @@
 import React, { Component } from 'react'
 
-var context = require.context('../1x', true, /\.(png)$/);
-var files={};
-context.keys().forEach((filename)=>{
-    files[filename] = context(filename);
-});
+
 
 class Card extends Component {
 
+    state = {
+       isClicked: false
+    }
+
+    handleCardClick = () => {
+       this.setState({
+           isClicked: true
+       })
+    }
+
     render() {
+        var context = require.context('../1x', true, /\.(png)$/);
+        var files={};
+        context.keys().forEach((filename)=>{
+            files[filename] = context(filename);
+        });
+
 
         return (
             <div
                 id={this.props.id}
-                className='flex-item'
+                onClick={this.handleCardClick}
+                className= {this.state.isClicked? 'selected flex-item'  : 'flex-item'}
             >
-                <img
-                    src={files["./"+this.props.srcUrl]}
-                    alt= "playing card"
-                    width={this.props.widthImg}
-                    height={this.props.heightImg}
-                />
+                {this.props.textValue ?
+                    this.props.textValue
+                    :
+                    <img
+                        src={this.props.srcUrl ? files["./"+this.props.srcUrl] : files["./unknown.png"]}
+                        alt= "playing card"
+                        width={this.props.widthImg}
+                        height={this.props.heightImg}
+                    />
+                }
             </div>
         )
     }

@@ -4,11 +4,6 @@ import Card from './Card'
 
 class CommunityCards extends Component {
 
-    state = {
-        selectedCards : []
-    }
-
-
     render() {
         return (
 

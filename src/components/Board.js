@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Card from "./Card";
 
 
 class Board extends Component {
@@ -20,82 +21,93 @@ class Board extends Component {
                                     <th className="suit redSuit" align="center">DIAM'S</th>
                                 </tr>
                                 <tr>
-                                    <td id="1_heart.png">Ace</td>
-                                    <td id="1_spade.png">Ace</td>
-                                    <td id="1_club.png">Ace</td>
-                                    <td id="1_diamond.png">Ace</td>
+                                    <td > <Card id="1_heart.png" textValue='Ace' /></td>
+                                    <td > <Card id="1_spade.png" textValue='Ace'/></td>
+                                    <td > <Card id="1_club.png" textValue='Ace'/></td>
+                                    <td > <Card id="1_diamond.png" textValue='Ace'/></td>
                                 </tr>
                                 <tr>
-                                    <td id="king_heart.png">King</td>
-                                    <td id="king_spade.png">King</td>
-                                    <td id="king_club.png">King</td>
-                                    <td id="king_diamond.png">King</td>
+                                    <td > <Card id="king_heart.png" textValue='King' /></td>
+                                    <td > <Card id="king_spade.png" textValue='King'/></td>
+                                    <td > <Card id="king_club.png" textValue='King'/></td>
+                                    <td > <Card id="king_diamond.png" textValue='King'/></td>
                                 </tr>
                                 <tr>
-                                    <td id="queen_heart.png">Queen</td>
-                                    <td id="queen_spade.png">Queen</td>
-                                    <td id="queen_club.png">Queen</td>
-                                    <td id="queen_diamond.png">Queen</td>
+                                    <td > <Card id="queen_heart.png" textValue='Queen' /></td>
+                                    <td > <Card id="queen_spade.png" textValue='Queen'/></td>
+                                    <td > <Card id="queen_club.png" textValue='Queen'/></td>
+                                    <td > <Card id="queen_diamond.png" textValue='Queen'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="jack_heart.png">Jack</td>
-                                    <td id="jack_spade.png">Jack</td>
-                                    <td id="jack_club.png">Jack</td>
-                                    <td id="jack_diamond.png">Jack</td>
+                                    <td > <Card id="jack_heart.png" textValue='Jack' /></td>
+                                    <td > <Card id="jack_spade.png"textValue='Jack'/></td>
+                                    <td > <Card id="jack_club.png" textValue='Jack'/></td>
+                                    <td > <Card id="jack_diamond.png"textValue='Jack'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="10_heart.png">Ten</td>
-                                    <td id="10_spade.png">Ten</td>
-                                    <td id="10_club.png">Ten</td>
-                                    <td id="10_diamond.png">Ten</td>
+                                    <td > <Card id="10_heart.png" textValue='Ten' /></td>
+                                    <td > <Card id="10_spade.png" textValue='Ten'/></td>
+                                    <td > <Card id="10_club.png" textValue='Ten'/></td>
+                                    <td > <Card id="10_diamond.png" textValue='Ten'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="9_heart.png">Nine</td>
-                                    <td id="9_spade.png">Nine</td>
-                                    <td id="9_club.png">Nine</td>
-                                    <td id="9_diamond.png">Nine</td>
+                                    <td > <Card id="9_heart.png" textValue='Nine' /></td>
+                                    <td > <Card id="9_spade.png" textValue='Nine'/></td>
+                                    <td > <Card id="9_club.png" textValue='Nine'/></td>
+                                    <td > <Card id="9_diamond.png" textValue='Nine'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="8_heart.png">Eight</td>
-                                    <td id="8_spade.png">Eight</td>
-                                    <td id="8_club.png">Eight</td>
-                                    <td id="8_diamond.png">Eight</td>
+                                    <td > <Card id="8_heart.png" textValue='Eight' /></td>
+                                    <td > <Card id="8_spade.png" textValue='Eight'/></td>
+                                    <td > <Card id="8_club.png"textValue='Eight'/></td>
+                                    <td > <Card id="8_diamond.png" textValue='Eight'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="7_heart.png">Seven</td>
-                                    <td id="7_spade.png">Seven</td>
-                                    <td id="7_club.png">Seven</td>
-                                    <td id="7_diamond.png">Seven</td>
+                                    <td > <Card id="7_heart.png" textValue='Seven' /></td>
+                                    <td > <Card id="7_spade.png" textValue='Seven'/></td>
+                                    <td > <Card id="7_club.png" textValue='Seven'/></td>
+                                    <td > <Card id="7_diamond.png" textValue='Seven'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="6_heart.png">Six</td>
-                                    <td id="6_spade.png">Six</td>
-                                    <td id="6_club.png">Six</td>
-                                    <td id="6_diamond.png">Six</td>
+                                    <td > <Card id="6_heart.png" textValue='Six' /></td>
+                                    <td > <Card id="6_spade.png" textValue='Six'/></td>
+                                    <td > <Card id="6_club.png" textValue='Six'/></td>
+                                    <td > <Card id="6_diamond.png" textValue='Six'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="5_heart.png">Five</td>
-                                    <td id="5_spade.png">Five</td>
-                                    <td id="5_club.png">Five</td>
-                                    <td id="5_diamond.png">Five</td>
+                                    <td > <Card id="5_heart.png" textValue='Five' /></td>
+                                    <td > <Card id="5_spade.png" textValue='Five'/></td>
+                                    <td > <Card id="5_club.png" textValue='Five'/></td>
+                                    <td > <Card id="5_diamond.png" textValue='Five'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="4_heart.png">Four</td>
-                                    <td id="4_spade.png">Four</td>
-                                    <td id="4_club.png">Four</td>
-                                    <td id="4_diamond.png">Four</td>
+                                    <td > <Card id="4_heart.png" textValue='Four' /></td>
+                                    <td > <Card id="4_spade.png" textValue='Four'/></td>
+                                    <td > <Card id="4_club.png" textValue='Four'/></td>
+                                    <td > <Card id="4_diamond.png" textValue='Four'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="3_heart.png">Three</td>
-                                    <td id="3_spade.png">Three</td>
-                                    <td id="3_club.png">Three</td>
-                                    <td id="3_diamond.png">Three</td>
+                                    <td > <Card id="3_heart.png" textValue='Three' /></td>
+                                    <td > <Card id="3_spade.png" textValue='Three'/></td>
+                                    <td > <Card id="3_club.png" textValue='Three'/></td>
+                                    <td > <Card id="3_diamond.png" textValue='Three'/></td>
+
                                 </tr>
                                 <tr>
-                                    <td id="2_heart.png">Deuce</td>
-                                    <td id="2_spade.png">Deuce</td>
-                                    <td id="2_club.png">Deuce</td>
-                                    <td id="2_diamond.png">Deuce</td>
+                                    <td > <Card id="2_heart.png" textValue='Deuce' /></td>
+                                    <td > <Card id="2_spade.png" textValue='Deuce'/></td>
+                                    <td > <Card id="2_club.png" textValue='Deuce'/></td>
+                                    <td > <Card id="2_diamond.png" textValue='Deuce'/></td>
+
                                 </tr>
                                 </tbody>
                             </table>
