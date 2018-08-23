@@ -3,6 +3,7 @@ import Board from './Board'
 import PlayerRange from './PlayerRange'
 import PlayerDecision from './PlayerDecision'
 import CommunityCards from './CommunityCards'
+import DropDownGameStage from './DropDownGameStage'
 
 import '../App.css';
 
@@ -10,23 +11,49 @@ class App extends Component {
 
     state = {
         selectedCards : [],
+        GameBoardStage: ''
     }
 
     handleClick = (e) => {
-        console.log(e.target)
+        this.updateSelectedCards(e)
+        this.setSelectFieldValue()
+    }
+
+    updateSelectedCards = (event) => {
         if (this.state.selectedCards.length <5
-            && !this.state.selectedCards.includes(e.target.id)
-            && e.target.id !== "communityCards") {
+            && !this.state.selectedCards.includes(event.target.id)
+            && event.target.id !== ("communityCards")
+            && event.target.id.length !== 0
+        ) {
             this.setState({
-                selectedCards : this.state.selectedCards.concat([e.target.id])
+                selectedCards : this.state.selectedCards.concat([event.target.id])
             })
         }
     }
 
+    setSelectFieldValue = () => {
 
+        switch (this.state.selectedCards.length ) {
+            case 2 :
+                this.setState({
+                    GameBoardStage: 'flop'
+                })
+                break;
+            case 3 :
+                this.setState({
+                    GameBoardStage: 'turn'
+                })
+                break;
+            case 4 :
+                this.setState({
+                    GameBoardStage: 'river'
+                })
+                break;
+        }
+    }
 
-    isSelected = () => {
-        return 'selected'
+    handleSelectField = () => {
+
     }
 
   render() {
@@ -58,14 +85,10 @@ class App extends Component {
           <PlayerDecision
               position = "oop"
           />
-
-              <div className='flex-item flex-container'>
-                  <select className='flex-item'>
-                      <option value="flop">FLOP</option>
-                      <option value="turn">TURN</option>
-                      <option value="river">RIVER</option>
-                  </select>
-              </div>
+              <DropDownGameStage
+                  value={this.state.GameBoardStage}
+                  handleSelectField={this.handleSelectField}
+              />
           <PlayerDecision
               position = "ip"
           />
