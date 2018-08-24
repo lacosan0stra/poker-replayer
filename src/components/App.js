@@ -11,7 +11,13 @@ class App extends Component {
 
     state = {
         selectedCards : [],
-        GameBoardStage: ''
+        GameBoardStage: '',
+        playFlow: {
+            preflop: ["hey", "what"],
+            flop: [],
+            turn: [],
+            river: [],
+        }
     }
 
     handleClick = (e) => {
@@ -69,12 +75,24 @@ class App extends Component {
           <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
 
           <div className='flex-container'>
-                <PlayerRange position = "oop" />
+                <PlayerRange
+                    position = "oop"
+                    preflop={this.state.playFlow['preflop'][0]}
+                    flop={this.state.playFlow['flop'][0]}
+                    turn={this.state.playFlow['turn'][0]}
+                    river={this.state.playFlow['river'][0]}
+                />
               <Board
                   handleClick={this.handleClick}
 
               />
-              <PlayerRange position = "ip" />
+              <PlayerRange
+                  position = "ip"
+                  preflop={this.state.playFlow['preflop'][1]}
+                  flop={this.state.playFlow['flop'][1]}
+                  turn={this.state.playFlow['turn'][1]}
+                  river={this.state.playFlow['river'][1]}
+              />
           </div>
 
           <div className='board-stage'>
