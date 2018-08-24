@@ -18,18 +18,22 @@ class Board extends Component {
     }
 
     handleClick = (e) => {
+        this.turnSquareYellow(e)
+    }
 
-        const newClickCount = this.state.clickCount +1
-
-        if (this.state.clickCount < 5) {
-            const newClassObject = this.state.classCardObject
-            newClassObject["./" + e.target.id] = "flex-item selected"
-            this.setState({
-                classCardObject: newClassObject,
-                clickCount: newClickCount
-            })
+    turnSquareYellow = (e) => {
+        if (!(this.state.classCardObject[["./" + e.target.id]]).includes('selected')) {
+            let newClickCount
+            newClickCount = this.state.clickCount +1
+            if (this.state.clickCount < 5) {
+                const newClassObject = this.state.classCardObject
+                newClassObject["./" + e.target.id] = "flex-item selected"
+                this.setState({
+                    classCardObject: newClassObject,
+                    clickCount: newClickCount
+                })
+            }
         }
-
     }
 
     render() {
