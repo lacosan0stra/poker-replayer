@@ -4,12 +4,6 @@ var context = require.context('../1x', true, /\.(png)$/);
 var classNames = {};
 var files={};
 
-// const handValues = ['Ace', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Jack', 'Queen', 'King'  ]
-// const objHands = {}
-
-// handValues.forEach((item, index)=>{
-//     objHands[index +1] = handValues[index]
-// })
 
 context.keys().forEach((filename)=>{
     classNames[filename] = 'flex-item';
@@ -18,7 +12,25 @@ context.keys().forEach((filename)=>{
 
 class Board extends Component {
 
+    state = {
+        classCardObject: classNames,
+        clickCount : 0
+    }
 
+    handleClick = (e) => {
+
+        const newClickCount = this.state.clickCount +1
+
+        if (this.state.clickCount < 5) {
+            const newClassObject = this.state.classCardObject
+            newClassObject["./" + e.target.id] = "flex-item selected"
+            this.setState({
+                classCardObject: newClassObject,
+                clickCount: newClickCount
+            })
+        }
+
+    }
 
     render() {
         const objMatchOrder ={
@@ -38,7 +50,8 @@ class Board extends Component {
         }
 
         const suits = ["_heart.png", "_spade.png", "_club.png", "_diamond.png" ]
-         const ArrayCardValues = [ "Ace", "King", "Queen", "Jack", "Ten", "Nine",
+
+        const ArrayCardValues = [ "Ace", "King", "Queen", "Jack", "Ten", "Nine",
             "Eight", "Seven" , "Six", "Five", "Four", "Three", "Two" ]
 
         return(
@@ -47,7 +60,7 @@ class Board extends Component {
                     <div className='board flex-item'>
                         <div>
 
-                            <table id="communityCards" onClick={this.props.handleClick}>
+                            <table id="communityCards" onClick={this.props.handleClick} >
                                 <tbody>
                                 <tr>
                                     <th className="suit redSuit" align="center">HEARTS</th>
@@ -59,14 +72,19 @@ class Board extends Component {
                                     {
                                         suits.map((suit)=> {
                                             return (
-                                                <td>
+                                                <td key={suit}>
                                                     {ArrayCardValues.map((value, index) => {
+
                                                         let idKey = objMatchOrder[index+1] + suit
-                                                        const cardName = value
-                                                        return ( <Card id={idKey} textValue={cardName}/>)
+                                                        let cardName = value
+                                                        return ( <Card key={index}
+                                                                       id={idKey}
+                                                                       textValue={cardName}
+                                                                       classCard =  {`${this.state.classCardObject[`./${idKey}`]}`}
+                                                                       handleClick={this.handleClick}
+                                                        />)
                                                     })
                                                     }
-
                                                 </td>
                                             )
                                         } )
@@ -84,3 +102,4 @@ class Board extends Component {
 }
 
 export default Board
+
