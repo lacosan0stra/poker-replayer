@@ -17,6 +17,27 @@ class App extends Component {
             turn: [],
             river: [],
         },
+        turnToPlay : 'oop',
+        toggleCount : 0
+    }
+
+    toggleTurnToPlay = () => {
+
+
+        if (this.state.turnToPlay === 'oop') {
+            const incrementToggleCount = this.state.toggleCount +1
+            this.setState({
+                turnToPlay: 'ip',
+                toggleCount : incrementToggleCount
+            })
+        } else {
+            const incrementToggleCount = this.state.toggleCount +1
+            this.setState({
+                turnToPlay: 'oop',
+                toggleCount : incrementToggleCount
+            })
+        }
+
     }
 
 
@@ -60,9 +81,47 @@ class App extends Component {
     }
     handleClickPlayerDecision = (e) => {
         const targetId = e.target.id
-        this.updateFlopPlayFlow(targetId)
-        this.updateTurnPlayFlow(targetId)
-        this.updateRiverPlayFlow(targetId)
+        if (this.state.turnToPlay === 'oop' &&  targetId.includes('oop') && this.state.toggleCount % 2 === 0) {
+            if (this.state.selectedCards.length === 3) {
+                if (this.state.playFlow.flop.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateFlopPlayFlow(targetId)
+            }
+            if (this.state.selectedCards.length === 4) {
+                if (this.state.playFlow.turn.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateTurnPlayFlow(targetId)
+            }
+            if (this.state.selectedCards.length === 5 ) {
+                if (this.state.playFlow.river.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateRiverPlayFlow(targetId)
+            }
+        }
+
+        if (this.state.turnToPlay === 'ip' &&  targetId.includes('ip') && this.state.toggleCount % 2 !== 0 ) {
+            if (this.state.selectedCards.length === 3) {
+                if (this.state.playFlow.flop.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateFlopPlayFlow(targetId)
+            }
+            if (this.state.selectedCards.length === 4) {
+                if (this.state.playFlow.turn.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateTurnPlayFlow(targetId)
+            }
+            if (this.state.selectedCards.length === 5 ) {
+                if (this.state.playFlow.river.length < 2) {
+                    this.toggleTurnToPlay()
+                }
+                this.updateRiverPlayFlow(targetId)
+            }
+        }
     }
 
     handleClick = (event) => {
@@ -84,23 +143,21 @@ class App extends Component {
     }
 
     setSelectFieldValue = () => {
-
-        switch (this.state.selectedCards.length ) {
-            case 3 :
-                this.setState({
-                    GameBoardStage: 'turn'
-                })
-                break;
-            case 4 :
-                this.setState({
-                    GameBoardStage: 'river'
-                })
-                break;
-        }
+            switch (this.state.selectedCards.length ) {
+                case 3 :
+                    this.setState({
+                        GameBoardStage: 'turn'
+                    })
+                    break;
+                case 4 :
+                    this.setState({
+                        GameBoardStage: 'river'
+                    })
+                    break;
+            }
     }
 
   render() {
-
     return (
       <div>
         <header >
@@ -134,29 +191,49 @@ class App extends Component {
           </div>
 
           <div className='flex-container'>
-          <PlayerDecision
-              position = "oop"
-              handleClick={this.handleClickPlayerDecision}
-              bet='bet_oop'
-              check='check_oop'
-              call='call_oop'
-              fold='fold_oop'
-              raise='raise_oop'
+              <div className='flex-column'>
+                  {
+                      (this.state.turnToPlay === 'oop' && this.state.toggleCount % 2 === 0) ?
+                          <div className='flex-item'> Player's turn to play </div>
+                          : <div className='flex-item'> The other player needs to play   </div>
 
-          />
+                  }
+                  <PlayerDecision
+                      position="oop"
+                      handleClick={this.handleClickPlayerDecision}
+                      bet='bet_oop'
+                      check='check_oop'
+                      call='call_oop'
+                      fold='fold_oop'
+                      raise='raise_oop'
+                      turnToPlay={this.mustPlayNow}
+
+                  />
+              </div>
+
+
               <DropDownGameStage
                   value={this.state.GameBoardStage}
               />
 
-          <PlayerDecision
-              position = "ip"
-              handleClick={this.handleClickPlayerDecision}
-              bet='bet_ip'
-              check='check_ip'
-              call='call_ip'
-              fold='fold_ip'
-              raise='raise_ip'
-          />
+              <div className='flex-column'>
+                  {
+                      this.state.turnToPlay === 'ip' ?
+                          <div className='flex-item'> Player's turn to play </div>
+                          : <div className='flex-item'> The other player needs to play   </div>
+
+                  }
+                  <PlayerDecision
+                      position = "ip"
+                      handleClick={this.handleClickPlayerDecision}
+                      bet='bet_ip'
+                      check='check_ip'
+                      call='call_ip'
+                      fold='fold_ip'
+                      raise='raise_ip'
+                      turnToPlay = {this.mustPlayNow}
+                  />
+              </div>
 
           </div>
 

@@ -47,3 +47,9 @@ table, th, td {
   border: 2px solid lightseagreen;
   margin-bottom: 20px;
 }
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+
+}

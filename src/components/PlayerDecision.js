@@ -4,6 +4,7 @@ class PlayerDecision extends Component {
     render() {
         return (
             <div>
+
                 <div className='flex-item'>
                     {this.props.position.toUpperCase()}  PLAYER OPTIONS
                     <div className='flex-container' onClick={this.props.handleClick}>
