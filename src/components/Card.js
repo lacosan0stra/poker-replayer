@@ -9,20 +9,16 @@ context.keys().forEach((filename)=>{
 });
 
 
-console.log(files)
-console.log(selectedClass)
 
 class Card extends Component {
 
 
     render() {
-
         return (
             <div
                 id={this.props.id}
                 onClick={this.props.handleClick}
                 className={this.props.classCard}
-
             >
                 {this.props.textValue ?
                     this.props.textValue
@@ -34,7 +30,6 @@ class Card extends Component {
                         height={this.props.heightImg}
                     />
                 }
-
             </div>
         )
     }

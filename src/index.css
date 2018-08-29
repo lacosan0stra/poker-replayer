@@ -34,3 +34,16 @@ table, th, td {
 .selected {
   background-color: yellow;
 }
+
+.flex-player-decision {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  border: 2px solid red;
+}
+
+.flex-player-decision-item {
+  align-self: center;
+  border: 2px solid lightseagreen;
+  margin-bottom: 20px;
+}

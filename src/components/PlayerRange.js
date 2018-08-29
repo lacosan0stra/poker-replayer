@@ -11,12 +11,6 @@ class PlayerRange extends Component {
                 </div>
                 <div id='player-decision' className='flex-player-decision'>
                     <div className='flex-player-decision-item'>
-                        Preflop
-                    </div>
-                    <div className='flex-player-decision-item'>
-                        {this.props.preflop}
-                    </div>
-                    <div className='flex-player-decision-item'>
                         Flop
                     </div>
                     <div className='flex-player-decision-item'>
