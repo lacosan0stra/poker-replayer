@@ -19,6 +19,7 @@ class App extends Component {
         },
         turnToPlay : 'oop',
         toggleCount : 0,
+        turnCardYellow : true
     }
 
     // PLAYFLOW PLAYER DECISIONS START
@@ -49,7 +50,7 @@ class App extends Component {
                     flop: playerDecision,
                     turn: this.state.playFlow.turn,
                     river: this.state.playFlow.river,
-                }
+                },
             })
         }
     }
@@ -109,12 +110,18 @@ class App extends Component {
                 if (this.state.playFlow.flop.length < 2) {
                     this.toggleTurnToPlay()
                     this.updateFlopPlayFlow(targetId)
+                    this.setState({
+                        turnCardYellow : true
+                    })
                 }
             }
             if (this.state.selectedCards.length === 4) {
                 if (this.state.playFlow.turn.length < 2) {
                     this.toggleTurnToPlay()
                     this.updateTurnPlayFlow(targetId)
+                    this.setState({
+                        turnCardYellow : true
+                    })
                 }
             }
             if (this.state.selectedCards.length === 5 ) {
@@ -152,14 +159,25 @@ class App extends Component {
     }
 
     isReadyToSelectFlopCards = () => {
+        if (this.state.selectedCards.length === 2) {
+            this.setState({
+                turnCardYellow : false
+            })
+        }
         return this.state.selectedCards.length < 3
     }
 
     isReadyToSelectTurnCard = () => {
+        this.setState({
+            turnCardYellow : false
+        })
         return this.state.playFlow.flop.length === 2 && this.state.selectedCards.length === 3
     }
 
     isReadyToSelectRiverCard = () => {
+        this.setState({
+            turnCardYellow : false
+        })
         return this.state.playFlow.turn.length === 2 && this.state.selectedCards.length === 4
     }
 
@@ -208,6 +226,7 @@ class App extends Component {
                 />
               <Board
                   handleClick={this.handleClickChart}
+                  turnCardYellow = {this.state.turnCardYellow}
               />
               <PlayerRange
                   position = "ip"

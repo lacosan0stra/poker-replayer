@@ -18,7 +18,7 @@ class Board extends Component {
     }
 
     handleClick = (e) => {
-        this.handleSquareColor(e)
+        this.props.turnCardYellow ? this.handleSquareColor(e) :''
     }
 
     handleSquareColor = (e) => {
@@ -86,7 +86,7 @@ class Board extends Component {
                                                                        id={idKey}
                                                                        textValue={cardName}
                                                                        classCard =  {`${this.state.classCardObject[`./${idKey}`]}`}
-                                                                       handleClick={this.handleSquareColor}
+                                                                       handleClick={this.handleClick}
                                                         />)
                                                     })
                                                     }
