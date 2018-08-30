@@ -192,7 +192,7 @@ class App extends Component {
     return (
       <div>
         <header >
-          <h1>Welcome to Poker Training Buddy </h1>
+          <h1> Poker Replayer with Hands ranges</h1>
         </header>
 
           <p className='explanation'> --> player enters OOP/IP ranges</p>
