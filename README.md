@@ -63,5 +63,3 @@ Missing :
 - A solution for permanent data (as we need to save the hands)
 - Add hand ranges to each decision
 - An algorithm to find what poker hand you have 
-- fix bug with cell turning yellow in cases when it is not required 
-
