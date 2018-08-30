@@ -18,11 +18,12 @@ class Board extends Component {
     }
 
     handleClick = (e) => {
-        this.turnSquareYellow(e)
+        this.handleSquareColor(e)
     }
 
-    turnSquareYellow = (e) => {
-        if (!(this.state.classCardObject[["./" + e.target.id]]).includes('selected')) {
+    handleSquareColor = (e) => {
+        if (!(this.state.classCardObject[["./" + e.target.id]]).includes('selected')
+        ) {
             let newClickCount
             newClickCount = this.state.clickCount +1
             if (this.state.clickCount < 5) {
@@ -85,7 +86,7 @@ class Board extends Component {
                                                                        id={idKey}
                                                                        textValue={cardName}
                                                                        classCard =  {`${this.state.classCardObject[`./${idKey}`]}`}
-                                                                       handleClick={this.handleClick}
+                                                                       handleClick={this.handleSquareColor}
                                                         />)
                                                     })
                                                     }

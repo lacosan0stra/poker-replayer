@@ -18,11 +18,12 @@ class App extends Component {
             river: [],
         },
         turnToPlay : 'oop',
-        toggleCount : 0
+        toggleCount : 0,
     }
 
-    toggleTurnToPlay = () => {
+    // PLAYFLOW PLAYER DECISIONS START
 
+    toggleTurnToPlay = () => {
 
         if (this.state.turnToPlay === 'oop') {
             const incrementToggleCount = this.state.toggleCount +1
@@ -37,7 +38,6 @@ class App extends Component {
                 toggleCount : incrementToggleCount
             })
         }
-
     }
 
 
@@ -85,20 +85,22 @@ class App extends Component {
             if (this.state.selectedCards.length === 3) {
                 if (this.state.playFlow.flop.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateFlopPlayFlow(targetId)
                 }
-                this.updateFlopPlayFlow(targetId)
+
             }
             if (this.state.selectedCards.length === 4) {
                 if (this.state.playFlow.turn.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateTurnPlayFlow(targetId)
                 }
-                this.updateTurnPlayFlow(targetId)
+
             }
             if (this.state.selectedCards.length === 5 ) {
                 if (this.state.playFlow.river.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateRiverPlayFlow(targetId)
                 }
-                this.updateRiverPlayFlow(targetId)
             }
         }
 
@@ -106,44 +108,69 @@ class App extends Component {
             if (this.state.selectedCards.length === 3) {
                 if (this.state.playFlow.flop.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateFlopPlayFlow(targetId)
                 }
-                this.updateFlopPlayFlow(targetId)
             }
             if (this.state.selectedCards.length === 4) {
                 if (this.state.playFlow.turn.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateTurnPlayFlow(targetId)
                 }
-                this.updateTurnPlayFlow(targetId)
             }
             if (this.state.selectedCards.length === 5 ) {
                 if (this.state.playFlow.river.length < 2) {
                     this.toggleTurnToPlay()
+                    this.updateRiverPlayFlow(targetId)
                 }
-                this.updateRiverPlayFlow(targetId)
             }
         }
     }
 
-    handleClick = (event) => {
-        if (this.state.selectedCards.length <5
-            && !this.state.selectedCards.includes(event.target.id)
-            && event.target.id !== ("communityCards")
-            && event.target.id.length !== 0
+    // PLAYFLOW PLAYER DECISIONS END
+
+
+    // SELECT CARDS ON THE CHART START
+    handleClickChart = (event) => {
+        if ( this.isCorrectId(event)
+            && this.isReadyToSelectBoardCards()
         ) {
-            this.updateSelectedCards(event)
-            this.setSelectFieldValue()
+                this.updateSelectedCards(event)
+                this.setSelectFieldValue()
         }
     }
 
+    isCorrectId = (event) => {
+        return  !this.state.selectedCards.includes(event.target.id)
+            && event.target.id !== ("communityCards")
+            && event.target.id.length !== 0
+    }
+
+    isReadyToSelectBoardCards = () => {
+        return (this.isReadyToSelectFlopCards())
+            || (this.isReadyToSelectTurnCard() )
+            || (this.isReadyToSelectRiverCard() )
+    }
+
+    isReadyToSelectFlopCards = () => {
+        return this.state.selectedCards.length < 3
+    }
+
+    isReadyToSelectTurnCard = () => {
+        return this.state.playFlow.flop.length === 2 && this.state.selectedCards.length === 3
+    }
+
+    isReadyToSelectRiverCard = () => {
+        return this.state.playFlow.turn.length === 2 && this.state.selectedCards.length === 4
+    }
+
     updateSelectedCards = (e) => {
-        e.preventDefault()
             this.setState({
-                selectedCards : this.state.selectedCards.concat([e.target.id])
+                selectedCards : this.state.selectedCards.concat([e.target.id]),
             })
     }
 
     setSelectFieldValue = () => {
-            switch (this.state.selectedCards.length ) {
+        switch (this.state.selectedCards.length ) {
                 case 3 :
                     this.setState({
                         GameBoardStage: 'turn'
@@ -154,8 +181,12 @@ class App extends Component {
                         GameBoardStage: 'river'
                     })
                     break;
+            default :
+                break;
             }
     }
+
+    // SELECT CARDS ON THE CHART END
 
   render() {
     return (
@@ -176,7 +207,7 @@ class App extends Component {
                     river={this.state.playFlow['river'][0]}
                 />
               <Board
-                  handleClick={this.handleClick}
+                  handleClick={this.handleClickChart}
               />
               <PlayerRange
                   position = "ip"
