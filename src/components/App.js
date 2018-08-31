@@ -80,10 +80,10 @@ class App extends Component {
             })
         }
     }
-    handleClickPlayerDecision = (e) => {
+
+    handleOopPlayerDecision = (e) => {
         const targetId = e.target.id
-        if (this.state.turnToPlay === 'oop' &&  targetId.includes('oop') && this.state.toggleCount % 2 === 0) {
-            if (this.state.selectedCards.length === 3) {
+                 if (this.state.selectedCards.length === 3) {
                 if (this.state.playFlow.flop.length < 2) {
                     this.toggleTurnToPlay()
                     this.updateFlopPlayFlow(targetId)
@@ -102,36 +102,53 @@ class App extends Component {
                     this.toggleTurnToPlay()
                     this.updateRiverPlayFlow(targetId)
                 }
+            }
+
+    }
+
+    handleIpPlayerDecision = (e) => {
+        const targetId = e.target.id
+        if (this.state.selectedCards.length === 3) {
+            if (this.state.playFlow.flop.length < 2) {
+                this.toggleTurnToPlay()
+                this.updateFlopPlayFlow(targetId)
+                this.setState({
+                    turnCardYellow : true
+                })
             }
         }
-
-        if (this.state.turnToPlay === 'ip' &&  targetId.includes('ip') && this.state.toggleCount % 2 !== 0 ) {
-            if (this.state.selectedCards.length === 3) {
-                if (this.state.playFlow.flop.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateFlopPlayFlow(targetId)
-                    this.setState({
-                        turnCardYellow : true
-                    })
-                }
+        if (this.state.selectedCards.length === 4) {
+            if (this.state.playFlow.turn.length < 2) {
+                this.toggleTurnToPlay()
+                this.updateTurnPlayFlow(targetId)
+                this.setState({
+                    turnCardYellow : true
+                })
             }
-            if (this.state.selectedCards.length === 4) {
-                if (this.state.playFlow.turn.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateTurnPlayFlow(targetId)
-                    this.setState({
-                        turnCardYellow : true
-                    })
-                }
-            }
-            if (this.state.selectedCards.length === 5 ) {
-                if (this.state.playFlow.river.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateRiverPlayFlow(targetId)
-                }
+        }
+        if (this.state.selectedCards.length === 5 ) {
+            if (this.state.playFlow.river.length < 2) {
+                this.toggleTurnToPlay()
+                this.updateRiverPlayFlow(targetId)
             }
         }
     }
+
+
+
+    handleClickPlayerDecision = (e) => {
+        const targetId = e.target.id
+        if (this.state.turnToPlay === 'oop' &&  targetId.includes('oop') && this.state.toggleCount % 2 === 0) {
+            this.handleOopPlayerDecision(e)
+        }
+
+        if (this.state.turnToPlay === 'ip' &&  targetId.includes('ip') && this.state.toggleCount % 2 !== 0 ) {
+            this.handleIpPlayerDecision(e)
+        }
+    }
+
+
+
 
     // PLAYFLOW PLAYER DECISIONS END
 
