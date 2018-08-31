@@ -31,12 +31,21 @@ class App extends Component {
     }
 
 
-
-
-
     // PLAYFLOW PLAYER DECISIONS START
 
-    toggleTurnToPlay = () => {
+    handleClickPlayerDecision = (e) => {
+        const targetId = e.target.id
+        if (this.state.turnToPlay === 'oop' &&  targetId.includes('oop') && this.state.toggleCount % 2 === 0) {
+            this._handleOopPlayerDecision(e)
+        }
+
+        if (this.state.turnToPlay === 'ip' &&  targetId.includes('ip') && this.state.toggleCount % 2 !== 0 ) {
+            this._handleIpPlayerDecision(e)
+        }
+    }
+
+
+    _toggleTurnToPlay = () => {
 
         if (this.state.turnToPlay === 'oop') {
             const incrementToggleCount = this.state.toggleCount +1
@@ -54,7 +63,7 @@ class App extends Component {
     }
 
 
-    updateFlopPlayFlow = (value) => {
+    _updateFlopPlayFlow = (value) => {
         if (this.state.GameStreet === 'flop') {
             let playerDecision = this.state.playFlow.flop.concat([value])
             this.setState({
@@ -67,7 +76,7 @@ class App extends Component {
         }
     }
 
-    updateTurnPlayFlow = (value) => {
+    _updateTurnPlayFlow = (value) => {
         if (this.state.GameStreet === 'turn') {
             let playerDecision = this.state.playFlow.turn.concat([value])
             this.setState({
@@ -80,7 +89,7 @@ class App extends Component {
         }
     }
 
-    updateRiverPlayFlow = (value) => {
+    _updateRiverPlayFlow = (value) => {
         if (this.state.GameStreet === 'river') {
             let playerDecision = this.state.playFlow.river.concat([value])
             this.setState({
@@ -93,12 +102,12 @@ class App extends Component {
         }
     }
 
-    handleOopPlayerDecision = (e) => {
+    _handleOopPlayerDecision = (e) => {
         const targetId = e.target.id
                  if (this.state.selectedCards.length === 3) {
                 if (this.state.playFlow.flop.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateFlopPlayFlow(targetId)
+                    this._toggleTurnToPlay()
+                    this._updateFlopPlayFlow(targetId)
                     this.setState({
                         displayInstruction: SELECT_IP_PLAYER_DECISION
                     })
@@ -107,8 +116,8 @@ class App extends Component {
             }
             if (this.state.selectedCards.length === 4) {
                 if (this.state.playFlow.turn.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateTurnPlayFlow(targetId)
+                    this._toggleTurnToPlay()
+                    this._updateTurnPlayFlow(targetId)
                 }
                 this.setState({
                     displayInstruction: SELECT_IP_PLAYER_DECISION
@@ -117,8 +126,8 @@ class App extends Component {
             }
             if (this.state.selectedCards.length === 5 ) {
                 if (this.state.playFlow.river.length < 2) {
-                    this.toggleTurnToPlay()
-                    this.updateRiverPlayFlow(targetId)
+                    this._toggleTurnToPlay()
+                    this._updateRiverPlayFlow(targetId)
                 }
                 this.setState({
                     displayInstruction: SELECT_IP_PLAYER_DECISION
@@ -127,12 +136,12 @@ class App extends Component {
 
     }
 
-    handleIpPlayerDecision = (e) => {
+    _handleIpPlayerDecision = (e) => {
         const targetId = e.target.id
         if (this.state.selectedCards.length === 3) {
             if (this.state.playFlow.flop.length < 2) {
-                this.toggleTurnToPlay()
-                this.updateFlopPlayFlow(targetId)
+                this._toggleTurnToPlay()
+                this._updateFlopPlayFlow(targetId)
                 this.setState({
                     turnCardYellow : true,
                     displayInstruction: SELECT_TURN_CARD
@@ -141,8 +150,8 @@ class App extends Component {
         }
         if (this.state.selectedCards.length === 4) {
             if (this.state.playFlow.turn.length < 2) {
-                this.toggleTurnToPlay()
-                this.updateTurnPlayFlow(targetId)
+                this._toggleTurnToPlay()
+                this._updateTurnPlayFlow(targetId)
                 this.setState({
                     turnCardYellow : true,
                     displayInstruction: SELECT_RIVER_CARD
@@ -151,8 +160,8 @@ class App extends Component {
         }
         if (this.state.selectedCards.length === 5 ) {
             if (this.state.playFlow.river.length < 2) {
-                this.toggleTurnToPlay()
-                this.updateRiverPlayFlow(targetId)
+                this._toggleTurnToPlay()
+                this._updateRiverPlayFlow(targetId)
             }
             this.setState({
                 displayInstruction: HAND_IS_FINISHED
@@ -162,16 +171,7 @@ class App extends Component {
 
 
 
-    handleClickPlayerDecision = (e) => {
-        const targetId = e.target.id
-        if (this.state.turnToPlay === 'oop' &&  targetId.includes('oop') && this.state.toggleCount % 2 === 0) {
-            this.handleOopPlayerDecision(e)
-        }
 
-        if (this.state.turnToPlay === 'ip' &&  targetId.includes('ip') && this.state.toggleCount % 2 !== 0 ) {
-            this.handleIpPlayerDecision(e)
-        }
-    }
 
 
 
@@ -181,30 +181,39 @@ class App extends Component {
 
     // SELECT CARDS ON THE CHART START
     handleClickChart = (event) => {
-        if ( this.isCorrectId(event)
-            && this.isReadyToSelectBoardCards()
-        ) {
-                this.updateSelectedCards(event)
-                this.setSelectFieldValue()
-        }
+      if (this._isNotEndOfTheHand()) {
+          if (this._isNotIpPlayerDecision()) {
+              if ( this._isCorrectId(event)
+                  && this._isReadyToSelectBoardCards()
+              ) {
+                  this._updateSelectedCards(event)
+                  this._setSelectFieldValue()
+              }
+          }
+      }
     }
 
-    isCorrectId = (event) => {
+    _isNotEndOfTheHand = () => {
+        return this.state.displayInstruction !== HAND_IS_FINISHED
+    }
+
+    _isNotIpPlayerDecision = () => {
+        return this.state.displayInstruction !== SELECT_IP_PLAYER_DECISION
+    }
+
+    _isCorrectId = (event) => {
         return  !this.state.selectedCards.includes(event.target.id)
             && event.target.id !== ("communityCards")
             && event.target.id.length !== 0
     }
 
-    isReadyToSelectBoardCards = () => {
-
-            return (this.isReadyToSelectFlopCards())
-                || (this.isReadyToSelectTurnCard() )
-                || (this.isReadyToSelectRiverCard() )
-
-
+    _isReadyToSelectBoardCards = () => {
+            return (this._isReadyToSelectFlopCards())
+                || (this._isReadyToSelectTurnCard() )
+                || (this._isReadyToSelectRiverCard() )
     }
 
-    isReadyToSelectFlopCards = () => {
+    _isReadyToSelectFlopCards = () => {
         if (this.state.selectedCards.length === 2) {
             this.setState({
                 turnCardYellow : false,
@@ -214,7 +223,7 @@ class App extends Component {
         return this.state.selectedCards.length < 3
     }
 
-    isReadyToSelectTurnCard = () => {
+    _isReadyToSelectTurnCard = () => {
         this.setState({
             turnCardYellow : false,
             displayInstruction: SELECT_OOP_PLAYER_DECISION
@@ -222,20 +231,20 @@ class App extends Component {
         return this.state.playFlow.flop.length === 2 && this.state.selectedCards.length === 3
     }
 
-    isReadyToSelectRiverCard = () => {
+    _isReadyToSelectRiverCard = () => {
         this.setState({
             turnCardYellow : false,
         })
         return this.state.playFlow.turn.length === 2 && this.state.selectedCards.length === 4
     }
 
-    updateSelectedCards = (e) => {
+    _updateSelectedCards = (e) => {
             this.setState({
                 selectedCards : this.state.selectedCards.concat([e.target.id]),
             })
     }
 
-    setSelectFieldValue = () => {
+    _setSelectFieldValue = () => {
         switch (this.state.selectedCards.length ) {
                 case 3 :
                     this.setState({
@@ -255,18 +264,11 @@ class App extends Component {
     // SELECT CARDS ON THE CHART END
 
   render() {
-
-
       return (
       <div>
-
-
         <header >
           <h1> Poker Replayer with Hands ranges</h1>
-
-
         </header>
-
 
           <p className='explanation'> --> player enters OOP/IP ranges</p>
           <p className='explanation'> --> player enters COMMUNITY CARDS</p>
@@ -293,6 +295,7 @@ class App extends Component {
                   handleClick={this.handleClickChart}
                   turnCardYellow = {this.state.turnCardYellow}
               />
+
               <PlayerRange
                   position = "ip"
                   flop={this.state.playFlow['flop'][1]}
@@ -308,8 +311,8 @@ class App extends Component {
           <div className='flex-container'>
               <div className='flex-column'>
                   {
-                      (this.state.turnToPlay === 'oop' && this.state.toggleCount % 2 === 0) ?
-                          <div className='flex-item'> SELECT PLAYER'S DECISION </div>
+                      (this.state.displayInstruction.includes('OOP PLAYER DECISION')) ?
+                          <div className='flex-item display-player-decision' > SELECT PLAYER'S DECISION </div>
                           : <div className='flex-item'> &nbsp;  </div>
 
                   }
@@ -321,7 +324,6 @@ class App extends Component {
                       call='call_oop'
                       fold='fold_oop'
                       raise='raise_oop'
-                      turnToPlay={this.mustPlayNow}
 
                   />
               </div>
@@ -333,9 +335,9 @@ class App extends Component {
 
               <div className='flex-column'>
                   {
-                      this.state.turnToPlay === 'ip' ?
-                          <div className='flex-item'> SELECT PLAYER'S DECISION </div>
-                          : <div className='flex-item'> &nbsp;   </div>
+                      (this.state.displayInstruction.includes('IP PLAYER DECISION')) ?
+                          <div className='flex-item display-player-decision' > SELECT PLAYER'S DECISION </div>
+                          : <div className='flex-item'> &nbsp;  </div>
 
                   }
                   <PlayerDecision
@@ -346,7 +348,6 @@ class App extends Component {
                       call='call_ip'
                       fold='fold_ip'
                       raise='raise_ip'
-                      turnToPlay = {this.mustPlayNow}
                   />
               </div>
 

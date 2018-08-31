@@ -70,3 +70,10 @@ table, th, td {
   margin-bottom: 30px;
   border-radius: 10px;
 }
+
+.display-player-decision {
+  background-color: rgb(236, 255, 216);
+  color: green;
+  text-align: center;
+
+}
