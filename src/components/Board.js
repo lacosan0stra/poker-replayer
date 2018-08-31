@@ -65,6 +65,8 @@ class Board extends Component {
                     <div className='board flex-item'>
                         <div>
 
+
+
                             <table id="communityCards" onClick={this.props.handleClick} >
                                 <tbody>
                                 <tr>
@@ -73,32 +75,29 @@ class Board extends Component {
                                     <th className="suit blackSuit" align="center">CLUBS</th>
                                     <th className="suit redSuit" align="center">DIAM'S</th>
                                 </tr>
-                                <tr>
-                                    {
-                                        suits.map((suit)=> {
-                                            return (
-                                                <td key={suit}>
-                                                    {ArrayCardValues.map((value, index) => {
 
-                                                        let idKey = objMatchOrder[index+1] + suit
-                                                        let cardName = value
-                                                        return ( <Card key={index}
-                                                                       id={idKey}
-                                                                       textValue={cardName}
-                                                                       classCard =  {`${this.state.classCardObject[`./${idKey}`]}`}
-                                                                       handleClick={this.handleClick}
-                                                        />)
-                                                    })
-                                                    }
-                                                </td>
-                                            )
-                                        } )
-                                    }
-
-                                </tr>
+                                {ArrayCardValues.map((value, index) => {
+                                    return (
+                                        <tr key={index}>
+                                            {suits.map((suit) => {
+                                                let idKey = objMatchOrder[index+1] + suit
+                                                return (
+                                                    <td key={suit}>
+                                                        <Card
+                                                            classCard =  {`${this.state.classCardObject[`./${idKey}`]}`}
+                                                            id={`${objMatchOrder[index+1]}${suit}`}
+                                                            textValue={value}
+                                                            handleClick={this.handleClick}
+                                                        />
+                                                    </td>
+                                                )
+                                            })
+                                            }
+                                        </tr>
+                                    )
+                                })}
                                 </tbody>
                             </table>
-
                         </div>
                     </div>
                 </div>
