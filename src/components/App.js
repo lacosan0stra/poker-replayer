@@ -30,7 +30,6 @@ class App extends Component {
         displayInstruction: DEFAULT_MESSAGE
     }
 
-
     // PLAYFLOW PLAYER DECISIONS START
 
     handleClickPlayerDecision = (e) => {
@@ -43,7 +42,6 @@ class App extends Component {
             this._handleIpPlayerDecision(e)
         }
     }
-
 
     _toggleTurnToPlay = () => {
 
@@ -124,16 +122,17 @@ class App extends Component {
                 })
 
             }
-            if (this.state.selectedCards.length === 5 ) {
-                if (this.state.playFlow.river.length < 2) {
-                    this._toggleTurnToPlay()
-                    this._updateRiverPlayFlow(targetId)
+            if (this._isNotEndOfTheHand()) {
+                if (this.state.selectedCards.length === 5 ) {
+                    if (this.state.playFlow.river.length < 2) {
+                        this._toggleTurnToPlay()
+                        this._updateRiverPlayFlow(targetId)
+                    }
+                    this.setState({
+                        displayInstruction: SELECT_IP_PLAYER_DECISION
+                    })
                 }
-                this.setState({
-                    displayInstruction: SELECT_IP_PLAYER_DECISION
-                })
             }
-
     }
 
     _handleIpPlayerDecision = (e) => {
@@ -168,12 +167,6 @@ class App extends Component {
             })
         }
     }
-
-
-
-
-
-
 
 
     // PLAYFLOW PLAYER DECISIONS END
