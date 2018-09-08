@@ -8,7 +8,7 @@ class CommunityCards extends Component {
         return (
 
             <div>
-                <button> ENTER COMMUNITY CARDS </button>
+
                 <div className='flex-container'>
                     <Card
                         srcUrl = {this.props.flopOne}

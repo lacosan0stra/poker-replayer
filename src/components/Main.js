@@ -5,9 +5,9 @@ import PlayerDecision from './PlayerDecision'
 import CommunityCards from './CommunityCards'
 import DropDownGameStage from './DropDownGameStage'
 
+
 import '../App.css';
 
-const DEFAULT_MESSAGE =  'SELECT THREE FLOP CARDS'
 const SELECT_OOP_PLAYER_DECISION =  'SELECT OOP PLAYER DECISION'
 const SELECT_IP_PLAYER_DECISION =  'SELECT IP PLAYER DECISION'
 const SELECT_TURN_CARD = 'SELECT TURN CARD'
@@ -349,6 +349,7 @@ class Main extends Component {
                     turn={this.state.selectedCards[3]}
                     river={this.state.selectedCards[4]}
                 />
+
             </div>
         );
     }
