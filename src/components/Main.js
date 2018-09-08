@@ -259,10 +259,6 @@ class Main extends Component {
                     <h1> Poker Replayer with Hands ranges</h1>
                 </header>
 
-                <p className='explanation'> --> player enters OOP/IP ranges</p>
-                <p className='explanation'> --> player enters COMMUNITY CARDS</p>
-                <p className='explanation'> --> For the MVP we do not have to enter actual ranges</p>
-
                 <div className='flex-container'>
                     <div id='display-message' className='flex-container'>
                         {
