@@ -32,13 +32,26 @@ class App extends Component {
     }
 
 
+// rails g model pokerhand sc1:string sc2:string sc3:string sc4:string sc5:string gamestreet:string turntoplay:string togglecount:string turnyellow:boolean displayinstruction:string f1:string f2:string f3:string turn:string river:string
+
+
 
     // SELECT CARDS ON THE CHART END
 
   render() {
       return (
       <div>
-       <Main/>
+       <Main
+           selectedCards={this.state.selectedCards}
+           GameStreet={this.state.GameStreet}
+           playFlow = {this.state.playFlow}
+           turnToPlay = {this.state.turnToPlay }
+           toggleCount = {this.state.toggleCount}
+           turnCardYellow = {this.state.turnCardYellow }
+           displayInstruction = {this.state.displayInstruction}
+       />
+
+
       </div>
     );
   }
