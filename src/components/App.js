@@ -27,7 +27,6 @@ class App extends Component {
                 showPreviousHands: true
             })
     }
-    // SELECT CARDS ON THE CHART END
 
   render() {
 

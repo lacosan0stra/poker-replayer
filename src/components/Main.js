@@ -7,6 +7,7 @@ import DropDownGameStage from './DropDownGameStage'
 
 
 import '../App.css';
+import axios from "axios/index";
 
 const DEFAULT_MESSAGE = 'SELECT THREE CARDS FOR THE FLOP'
 const SELECT_OOP_PLAYER_DECISION =  'SELECT OOP PLAYER DECISION'
@@ -102,7 +103,6 @@ class Main extends Component {
     }
 
     _handleOopPlayerDecision = (e) => {
-        console.log("hANDLEOOPDECISION", e.target.id)
         const targetId = e.target.id
         if (this.state.selectedCards.length === 3) {
             if (this.state.playFlow.flop.length < 2) {
@@ -255,8 +255,54 @@ class Main extends Component {
                 break;
         }
     }
+//
+// {
+//     sc1:"queen_heart.png",
+//     sc2:"jack_spade.png",
+//     sc3:"10_spade.png",
+//     sc4:"5_diamond.png",
+//     sc5:"1_spade.png",
+//     gamestreet:"river",
+//     turntoplay: "oop",
+//     togglecount: 6 ,
+//     turnyellow: false,
+//     displayinstruction: "THE HAND IS FINISHED",
+//     flopoop: "bet_fold_oop",
+//     flopip: "call_ip",
+//     turnoop: "bet_fold_oop",
+//     turnip: "call_ip",
+//     riveroop: "bet_fold_oop",
+//     rivrerip: "fold_ip"
+// }
 
-    // SELECT CARDS ON THE CHART END
+
+    addNewPokerHand = () => {
+        axios.post('http://localhost:3001/api/v1/pokerhands', {pokerhand: {
+                sc1:"queen_diamond.png",
+                sc2:"jack_diamond.png",
+                sc3:"10_diamond.png",
+                sc4:"5_diamond.png",
+                sc5:"1_diamond.png",
+                gamestreet:"river",
+                turntoplay: "oop",
+                togglecount: 6 ,
+                turnyellow: false,
+                displayinstruction: "THE HAND IS FINISHED",
+                flopoop: "check_fold_oop",
+                flopip: "check_ip",
+                turnoop: "check_fold_oop",
+                turnip: "check_ip",
+                riveroop: "check_fold_oop",
+                rivrerip: "check_ip"
+            }
+            })
+            .then(res => {
+                console.log('AXIOS POST', res.data)
+
+            })
+            .catch(err => console.log(err))
+    }
+
 
     render() {
         return (
@@ -264,6 +310,8 @@ class Main extends Component {
                 <header >
                     <h1> Poker Replayer with Hands ranges</h1>
                 </header>
+
+                <button onClick={this.addNewPokerHand}> Save Hand </button>
 
                 <div className='flex-container'>
                     <div id='display-message' className='flex-container'>
