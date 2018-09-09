@@ -57,9 +57,6 @@ class PreviousHands extends Component {
                                         />
                                     </div>
                                 </div>
-
-
-
                             )
                         })
                     )

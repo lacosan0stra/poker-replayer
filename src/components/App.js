@@ -15,7 +15,7 @@ const ButtonRoute = ({label, handleClick}) => {
 class App extends Component {
 
     state = {
-       showPreviousHands: true
+       showPreviousHands: false
     }
 
     handleClickPreviousHands = () => {
@@ -27,8 +27,6 @@ class App extends Component {
                 showPreviousHands: true
             })
     }
-
-
     // SELECT CARDS ON THE CHART END
 
   render() {

@@ -102,6 +102,7 @@ class Main extends Component {
     }
 
     _handleOopPlayerDecision = (e) => {
+        console.log("hANDLEOOPDECISION", e.target.id)
         const targetId = e.target.id
         if (this.state.selectedCards.length === 3) {
             if (this.state.playFlow.flop.length < 2) {
@@ -309,12 +310,18 @@ class Main extends Component {
                         <PlayerDecision
                             position="oop"
                             handleClick={this.handleClickPlayerDecision}
-                            bet='bet_oop'
-                            check='check_oop'
                             call='call_oop'
                             fold='fold_oop'
-                            raise='raise_oop'
-
+                            check='check_oop'
+                            betFold='bet_fold_oop'
+                            checkFold='check_fold_oop'
+                            raiseFold='raise_fold_oop'
+                            betCall='bet_call_oop'
+                            checkCall='check_call_oop'
+                            raiseCall='raise_call_oop'
+                            betRaise='bet_raise_oop'
+                            checkRaise='check_raise_oop'
+                            raiseRaise='raise_raise_oop'
                         />
                     </div>
 
@@ -333,11 +340,18 @@ class Main extends Component {
                         <PlayerDecision
                             position = "ip"
                             handleClick={this.handleClickPlayerDecision}
-                            bet='bet_ip'
-                            check='check_ip'
                             call='call_ip'
                             fold='fold_ip'
-                            raise='raise_ip'
+                            check='check_ip'
+                            betFold='bet_fold_ip'
+                            checkFold='check_fold_ip'
+                            raiseFold='raise_fold_ip'
+                            betCall='bet_call_ip'
+                            checkCall='check_call_ip'
+                            raiseCall='raise_call_ip'
+                            betRaise='bet_raise_ip'
+                            checkRaise='check_raise_ip'
+                            raiseRaise='raise_raise_ip'
                         />
                     </div>
 
