@@ -20,7 +20,7 @@ class PlayerRange extends Component {
             <div className={`${this.props.position}-position flex-item`}>
                 {this.props.position.toUpperCase()}
                 <div>
-                    <button> {`Enter ${this.props.position.toUpperCase()} range`} </button>
+
                 </div>
                 <div id='player-decision' className='flex-player-decision'>
                     <div className='flex-player-decision-item header-title-streets'>
