@@ -16,7 +16,6 @@ class PreviousHands extends Component {
     componentDidMount() {
         axios.get('http://localhost:3001/api/v1/pokerhands')
             .then(res => {
-                console.log(res.data)
                 this.setState({
                     pokerhands: [res.data]
                 })

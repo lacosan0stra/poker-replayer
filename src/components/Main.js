@@ -4,7 +4,7 @@ import PlayerRange from './PlayerRange'
 import PlayerDecision from './PlayerDecision'
 import CommunityCards from './CommunityCards'
 import DropDownGameStage from './DropDownGameStage'
-
+import update from 'immutability-helper'
 
 import '../App.css';
 import axios from "axios/index";
@@ -29,7 +29,7 @@ class Main extends Component {
         turnToPlay : 'oop',
         toggleCount : 0,
         turnCardYellow : true,
-        displayInstruction: DEFAULT_MESSAGE
+        displayInstruction: DEFAULT_MESSAGE,
     }
 
     // PLAYFLOW PLAYER DECISIONS START
@@ -255,49 +255,33 @@ class Main extends Component {
                 break;
         }
     }
-//
-// {
-//     sc1:"queen_heart.png",
-//     sc2:"jack_spade.png",
-//     sc3:"10_spade.png",
-//     sc4:"5_diamond.png",
-//     sc5:"1_spade.png",
-//     gamestreet:"river",
-//     turntoplay: "oop",
-//     togglecount: 6 ,
-//     turnyellow: false,
-//     displayinstruction: "THE HAND IS FINISHED",
-//     flopoop: "bet_fold_oop",
-//     flopip: "call_ip",
-//     turnoop: "bet_fold_oop",
-//     turnip: "call_ip",
-//     riveroop: "bet_fold_oop",
-//     rivrerip: "fold_ip"
-// }
 
 
     addNewPokerHand = () => {
         axios.post('http://localhost:3001/api/v1/pokerhands', {pokerhand: {
-                sc1:"queen_diamond.png",
-                sc2:"jack_diamond.png",
-                sc3:"10_diamond.png",
-                sc4:"5_diamond.png",
-                sc5:"1_diamond.png",
-                gamestreet:"river",
+                sc1: this.state.selectedCards[0],
+                sc2: this.state.selectedCards[1],
+                sc3: this.state.selectedCards[2],
+                sc4:this.state.selectedCards[3],
+                sc5: this.state.selectedCards[4],
+                gamestreet: this.state.GameStreet,
                 turntoplay: "oop",
-                togglecount: 6 ,
+                togglecount: this.state.togglecount,
                 turnyellow: false,
                 displayinstruction: "THE HAND IS FINISHED",
-                flopoop: "check_fold_oop",
-                flopip: "check_ip",
-                turnoop: "check_fold_oop",
-                turnip: "check_ip",
-                riveroop: "check_fold_oop",
-                rivrerip: "check_ip"
+                flopoop: this.state.playFlow.flop[0],
+                flopip: this.state.playFlow.flop[1],
+                turnoop: this.state.playFlow.turn[0],
+                turnip: this.state.playFlow.turn[1],
+                riveroop: this.state.playFlow.river[0],
+                rivrerip: this.state.playFlow.river[1]
             }
             })
             .then(res => {
-                console.log('AXIOS POST', res.data)
+                this.setState({
+                    displayInstruction : "The hand has been saved"
+                })
+
 
             })
             .catch(err => console.log(err))
@@ -318,7 +302,6 @@ class Main extends Component {
                         {
                             this.state.displayInstruction
                         }
-
                     </div>
 
                 </div>
