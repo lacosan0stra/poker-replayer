@@ -8,6 +8,7 @@ import DropDownGameStage from './DropDownGameStage'
 
 import '../App.css';
 
+const DEFAULT_MESSAGE = 'SELECT THREE CARDS FOR THE FLOP'
 const SELECT_OOP_PLAYER_DECISION =  'SELECT OOP PLAYER DECISION'
 const SELECT_IP_PLAYER_DECISION =  'SELECT IP PLAYER DECISION'
 const SELECT_TURN_CARD = 'SELECT TURN CARD'
@@ -17,13 +18,17 @@ const HAND_IS_FINISHED = 'THE HAND IS FINISHED'
 class Main extends Component {
 
     state = {
-        selectedCards : this.props.selectedCards,
-        GameStreet: this.props.GameStreet,
-        playFlow: this.props.playFlow,
-        turnToPlay : this.props.turnToPlay,
-        toggleCount : this.props.toggleCount,
-        turnCardYellow : this.props.turnCardYellow,
-        displayInstruction: this.props.displayInstruction,
+        selectedCards : [],
+        GameStreet: 'flop' || '',
+        playFlow: {
+            flop: [],
+            turn: [],
+            river: [],
+        },
+        turnToPlay : 'oop',
+        toggleCount : 0,
+        turnCardYellow : true,
+        displayInstruction: DEFAULT_MESSAGE
     }
 
     // PLAYFLOW PLAYER DECISIONS START

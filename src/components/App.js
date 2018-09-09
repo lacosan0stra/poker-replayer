@@ -15,18 +15,7 @@ const ButtonRoute = ({label, handleClick}) => {
 class App extends Component {
 
     state = {
-        selectedCards : [],
-        GameStreet: 'flop' || '',
-        playFlow: {
-            flop: [],
-            turn: [],
-            river: [],
-        },
-        turnToPlay : 'oop',
-        toggleCount : 0,
-        turnCardYellow : true,
-        displayInstruction: DEFAULT_MESSAGE,
-        showPreviousHands: false
+       showPreviousHands: true
     }
 
     handleClickPreviousHands = () => {
@@ -40,8 +29,6 @@ class App extends Component {
     }
 
 
-
-
     // SELECT CARDS ON THE CHART END
 
   render() {
@@ -51,35 +38,20 @@ class App extends Component {
           {
               this.state.showPreviousHands ?
                   <div>
-                      <PreviousHands/>
                       <ButtonRoute label='GO BACK TO MAIN PAGE'
                                    handleClick={this.handleClickPreviousHands}
                       />
+                      <PreviousHands/>
                   </div>
                   :
                   <div>
-                      <Main
-                      selectedCards={this.state.selectedCards}
-                      GameStreet={this.state.GameStreet}
-                      playFlow = {this.state.playFlow}
-                      turnToPlay = {this.state.turnToPlay }
-                      toggleCount = {this.state.toggleCount}
-                      turnCardYellow = {this.state.turnCardYellow }
-                      displayInstruction = {this.state.displayInstruction}
-                      />
+                      <Main/>
                   <ButtonRoute
-                      label='see previous hands'
+                      label='SEE PREVIOUS HANDS'
                       handleClick={this.handleClickPreviousHands}
                   />
                   </div>
-
           }
-
-
-
-
-
-
       </div>
     );
   }
